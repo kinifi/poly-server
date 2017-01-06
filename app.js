@@ -210,17 +210,17 @@ router.route('/player/:player_name/:player_score').put(function(req, res) {
 router.route('/poly/:poly_name').delete(function(req, res) {
 
   //how many leaderboard values do you want?
-  var playerName = req.params.poly_name;
+  var poly_name = req.params.poly_name;
 
   firstleaderboard.remove({
-    player: playerName
+    poly: poly_name
   }, function (err, result) {
 
       if(err){
         //send the error
-        res.json({ message: 'error deleting player', error: err});
+        res.json({ message: 'error deleting poly', error: err});
       }
-
+      //if successful send a json object saying success
       if(result){
         //send the values back
         res.json({ message: 'success'});
