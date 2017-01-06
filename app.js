@@ -69,28 +69,18 @@ router.route('/poly').post(function(req, res) {
 
     //get the data we need and store it
     //the name of the poly
-    var newPoly = req.body.name;
+    var pname = req.body.name;
     //the json data of the poly
-    var newPolyInitFile = req.body.score;
-
-    //TODO: make a duplicate of the init_template.json file here
-
-
-    //get all the data we need from the poly init file
-
-    /*
-    //set all the results into the json schema
-    init_template.name = result.name;
-    init_template.version = result.version;
-    init_template.description = result.description;
-    init_template.repository.url = result.repository;
-    init_template.repository.type = result.repositoryType;
-    init_template.keywords = result.keywords;
-    init_template.author = result.author;
-    init_template.license = result.license;
-    init_template.bugs.url = result.bugs;
-    init_template.website = result.website;
-    */
+    var pversion = req.body.version;
+    var pdescription = req.body.description;
+    var prepourl = req.body.repourl;
+    var prepotype = req.body.repotype;
+    var preposize = req.body.reposize;
+    var pkeywords = req.body.keywords;
+    var newauthor = req.body.author;
+    var newlicense = req.body.license;
+    var newbugsurl = req.body.bugsurl;
+    var newwebsite = req.body.website;
 
     //insert the data into the database
     firstleaderboard.insert({
@@ -122,14 +112,15 @@ router.route('/poly').post(function(req, res) {
   });
 
 ///api/players/:count_num - get top players score specified by language
-router.route('/players/:count_num').get(function(req, res) {
+router.route('/poly/:keyword/:count_num').get(function(req, res) {
 
   //how many leaderboard values do you want?
   var theCount = Number(req.params.count_num);
+  var keyword = req.params.keyword;
 
   //search the database for the score and return it in json format
   firstleaderboard
-  	.find()
+  	.find({ $text: { $search: keyword } })
     .sort({'score': -1})
   	.limit(theCount)
   	.toArray(function(err,results){
