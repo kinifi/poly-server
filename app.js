@@ -104,7 +104,7 @@ router.route('/poly').post(function(req, res) {
       'reposize' : preposize,
       'keywords' : pkeywords,
       'author' : pauthor,
-      'license' : plicense
+      'license' : plicense,
       'bugsurl' : pbugsurl,
       'website' : pwebsite
     }, function(err, result) {
