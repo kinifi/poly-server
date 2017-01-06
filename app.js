@@ -61,18 +61,52 @@ router.use(function(req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-//add a player to the database with its score
-router.route('/player').post(function(req, res) {
+//add a poly to the database with its json data
+router.route('/poly').post(function(req, res) {
 
     //get the data we need and store it
-    var newPlayer = req.body.name;
-    var newPlayerScore = req.body.score;
-    // console.log(newPlayer, newPlayerScore);
+    //the name of the poly
+    var newPoly = req.body.name;
+    //the json data of the poly
+    var newPolyInitFile = req.body.score;
+
+    //example of the json data
+    /*
+    {
+      "name": "SteamJS",
+      "version": "0.0.2",
+      "description": "cropping of images for game backends",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kinifi/SteamJS.git",
+        "size": ""
+      },
+      "keywords": "",
+      "author": "@kinifi",
+      "license": "MIT",
+      "bugs": {
+        "url": "https://github.com/kinifi/SteamJS/issues"
+      },
+      "website": "https://github.com/kinifi/SteamJS#readme"
+    }
+    */
+
+    //get all the data we need from the poly init file
+
 
     //insert the data into the database
     firstleaderboard.insert({
-      'player' : newPlayer,
-      'score' : Number(newPlayerScore)
+      'poly' : pname,
+      'version' : pversion,
+      'description' : pdescription,
+      'repotype' : prepotype,
+      'repourl' : prepourl,
+      'reposize' : preposize,
+      'keywords' : pkeywords,
+      'author' : pauthor,
+      'license' : plicense
+      'bugsurl' : pbugsurl,
+      'website' : pwebsite
     }, function(err, result) {
         //if error send the error message
         if(err){
@@ -85,6 +119,7 @@ router.route('/player').post(function(req, res) {
           res.json({ message: 'success', result: result});
         }
     });
+
 
   });
 
@@ -173,11 +208,11 @@ router.route('/player/:player_name/:player_score').put(function(req, res) {
 
 });
 
-// /api/player/:player_name - delete  - update the score
-router.route('/player/:player_name').delete(function(req, res) {
+// /api/poly/:poly_name - delete  - update the score
+router.route('/poly/:poly_name').delete(function(req, res) {
 
   //how many leaderboard values do you want?
-  var playerName = req.params.player_name;
+  var playerName = req.params.poly_name;
 
   firstleaderboard.remove({
     player: playerName
