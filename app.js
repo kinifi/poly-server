@@ -1,3 +1,5 @@
+
+
 // BASE SETUP
 // =============================================================================
 //api overview:
@@ -18,19 +20,21 @@ var httpProxy       = require('http-proxy');
 var fs              = require("fs");
 var Engine          = require('tingodb')();
 var database        = new Engine.Db(__dirname + '/db',{});
-//the leaderboard database
-//this is the first leaderboard we created
-var firstleaderboard = database.collection('firstleaderboard');
+
+//the poly database
+//TODO refactor this and rename the firstleaderboard to poly-database
+var firstleaderboard = database.collection('poly-database');
 
 //set up the repo limit
 var RateLimit       = require('express-rate-limit');
 
+//TODO: create apiLimiter for each call instead of having one for all
 var apiLimiter = new RateLimit({
   windowMs: 60*60*1000, // 1 hour window
   // delayAfter: 1, // begin slowing down responses after the first request
   delayMs: 0, // disabled
   max: 100, // start blocking after 5 requests
-  message: "Too many accounts created from this IP, please try again after an hour"
+  message: "Too many requests from this IP, please try again after an hour"
 });
 
 //use this is on heroku
@@ -38,8 +42,6 @@ app.enable('trust proxy');
 
 // only apply to requests that begin with /api/
 app.use('/api/', apiLimiter);
-
-
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -58,9 +60,6 @@ router.use(function(req, res, next) {
     // console.log('Something is happening.');
     next(); // make sure we go to the next routes and don't stop here
 });
-
-// test route to make sure everything is working
-//(accessed at GET http://localhost:8080/api)
 
 //add a player to the database with its score
 router.route('/player').post(function(req, res) {
