@@ -77,10 +77,10 @@ router.route('/poly').post(function(req, res) {
     var prepotype = req.body.repotype;
     var preposize = req.body.reposize;
     var pkeywords = req.body.keywords;
-    var newauthor = req.body.author;
-    var newlicense = req.body.license;
-    var newbugsurl = req.body.bugsurl;
-    var newwebsite = req.body.website;
+    var pauthor = req.body.author;
+    var plicense = req.body.license;
+    var pbugsurl = req.body.bugsurl;
+    var pwebsite = req.body.website;
 
     //insert the data into the database
     firstleaderboard.insert({
