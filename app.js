@@ -25,6 +25,9 @@ var database        = new Engine.Db(__dirname + '/db',{});
 //TODO refactor this and rename the firstleaderboard to poly-database
 var firstleaderboard = database.collection('poly-database');
 
+//the poly init file
+var init_template   = require('./libs/init_template');
+
 //set up the repo limit
 var RateLimit       = require('express-rate-limit');
 
@@ -70,29 +73,24 @@ router.route('/poly').post(function(req, res) {
     //the json data of the poly
     var newPolyInitFile = req.body.score;
 
-    //example of the json data
-    /*
-    {
-      "name": "SteamJS",
-      "version": "0.0.2",
-      "description": "cropping of images for game backends",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/kinifi/SteamJS.git",
-        "size": ""
-      },
-      "keywords": "",
-      "author": "@kinifi",
-      "license": "MIT",
-      "bugs": {
-        "url": "https://github.com/kinifi/SteamJS/issues"
-      },
-      "website": "https://github.com/kinifi/SteamJS#readme"
-    }
-    */
+    //TODO: make a duplicate of the init_template.json file here
+
 
     //get all the data we need from the poly init file
 
+    /*
+    //set all the results into the json schema
+    init_template.name = result.name;
+    init_template.version = result.version;
+    init_template.description = result.description;
+    init_template.repository.url = result.repository;
+    init_template.repository.type = result.repositoryType;
+    init_template.keywords = result.keywords;
+    init_template.author = result.author;
+    init_template.license = result.license;
+    init_template.bugs.url = result.bugs;
+    init_template.website = result.website;
+    */
 
     //insert the data into the database
     firstleaderboard.insert({
