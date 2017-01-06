@@ -1,0 +1,5 @@
+{
+  "name": "express-lb",
+  "description": "A simple rest-api for leaderboards",
+  "repository": "https://github.com/kinifi/Express-LB"
+}
