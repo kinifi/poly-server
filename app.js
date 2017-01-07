@@ -102,19 +102,21 @@ router.route('/poly/:name/:version/:description/:repotype/:repourl/:reposize/:ke
 
   });
 
-//TODO: figure out how to return this info
-router.route('/poly/:keyword/:count_num').get(function(req, res) {
+//Gets a poly and its information by name. STRICT
+router.route('/poly/:polyname').get(function(req, res) {
 
   //how many leaderboard values do you want?
-  var theCount = Number(req.params.count_num);
-  var keyword = req.params.keyword;
-  console.log(theCount, keyword);
+  //var theCount = Number(req.params.count_num);
+  //var keyword = req.params.keyword;
+  //console.log(theCount, keyword);
+
+
 
   //search the database for the score and return it in json format
   firstleaderboard
-    .find({ $text: { $search: keyword } })
-    .sort({'downloads': -1})
-    .limit(theCount)
+    .find({ 'poly': req.params.polyname})
+    //.sort({'downloads': -1})
+    //.limit(theCount)
   	.toArray(function(err,results){
 
       //check if we have any errors first
@@ -125,9 +127,16 @@ router.route('/poly/:keyword/:count_num').get(function(req, res) {
 
       //send out the results
       if(results) {
-        console.log(results);
-        //send the values back
-        res.json(results);
+        if(results.Length !== undefined) {
+          res.json({ message: 'no poly with that exact match'});
+        }
+        else {
+          //send the values back
+          res.json(results);
+        }
+
+        // console.log(results.Length);
+
       }
       else {
         res.json({ message: 'error', error: 'no results'});
