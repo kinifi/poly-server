@@ -64,37 +64,28 @@ router.use(function(req, res, next) {
     next(); // make sure we go to the next routes and don't stop here
 });
 
-//add a poly to the database with its json data
-router.route('/poly').post(function(req, res) {
+//TODO: make this api better..
+router.route('/poly/:name/:version/:description/:repotype/:repourl/:reposize/:keywords/:author/:license/:bugsurl/:website/:featured/:private/:downloads').post(function(req, res) {
 
     //get the data we need and store it
-    //the name of the poly
-    var pname = req.body.name;
-    //the json data of the poly
-    var pversion = req.body.version;
-    var pdescription = req.body.description;
-    var prepourl = req.body.repourl;
-    var prepotype = req.body.repotype;
-    var preposize = req.body.reposize;
-    var pkeywords = req.body.keywords;
-    var pauthor = req.body.author;
-    var plicense = req.body.license;
-    var pbugsurl = req.body.bugsurl;
-    var pwebsite = req.body.website;
+    //TODO: validate this data before inserting
 
     //insert the data into the database
     firstleaderboard.insert({
-      'poly' : pname,
-      'version' : pversion,
-      'description' : pdescription,
-      'repotype' : prepotype,
-      'repourl' : prepourl,
-      'reposize' : preposize,
-      'keywords' : pkeywords,
-      'author' : pauthor,
-      'license' : plicense,
-      'bugsurl' : pbugsurl,
-      'website' : pwebsite
+      'poly' : req.params.name,
+      'version' : req.params.version,
+      'description' : req.params.description,
+      'repotype' : req.params.repotype,
+      'repourl' : req.params.repourl,
+      'reposize' : req.params.reposize,
+      'keywords' : req.params.keywords,
+      'author' : req.params.author,
+      'license' : req.params.license,
+      'bugsurl' : req.params.bugsurl,
+      'website' : req.params.website,
+      'featured' : false,
+      'privatepoly' : req.params.private,
+      'downloads' : 0
     }, function(err, result) {
         //if error send the error message
         if(err){
@@ -111,31 +102,35 @@ router.route('/poly').post(function(req, res) {
 
   });
 
-///api/players/:count_num - get top players score specified by language
+//TODO: figure out how to return this info
 router.route('/poly/:keyword/:count_num').get(function(req, res) {
 
   //how many leaderboard values do you want?
   var theCount = Number(req.params.count_num);
   var keyword = req.params.keyword;
+  console.log(theCount, keyword);
 
   //search the database for the score and return it in json format
   firstleaderboard
-  	.find({ $text: { $search: keyword } })
-    .sort({'score': -1})
-  	.limit(theCount)
+    .find({ $text: { $search: keyword } })
+    .sort({'downloads': -1})
+    .limit(theCount)
   	.toArray(function(err,results){
 
       //check if we have any errors first
       if(err){
         //send the error
-        res.json({ message: 'error getting scores', error: err});
+        res.json({ message: 'error getting polys', error: err});
       }
+
+      //send out the results
       if(results) {
+        console.log(results);
         //send the values back
         res.json(results);
       }
       else {
-        res.json({ message: 'error getting player_name', error: 'no results'});
+        res.json({ message: 'error', error: 'no results'});
       }
 
   	});
