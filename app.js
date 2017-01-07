@@ -166,34 +166,6 @@ router.route('/poly/:polyname').get(function(req, res) {
 
 });
 
-// /api/player/:player_name - get  - a single player
-router.route('/player/:player_name').get(function(req, res) {
-
-  //how many leaderboard values do you want?
-  var playerName = req.params.player_name;
-
-  //search the database for the score and return it in json format
-  firstleaderboard
-  	.find({'player': playerName})
-  	.toArray(function(err,results) {
-      //check if we have any errors first
-      if(err){
-        //send the error
-        res.json({ message: 'error getting player_name', error: err});
-      }
-
-      if(results){
-        //send the values back
-        res.json(results[0]);
-      }
-      else {
-        res.json({ message: 'error getting player_name', error: 'no results'});
-      }
-
-  	});
-
-});
-
 // /api/player/:player_name - put  - update the score
 router.route('/player/:player_name/:player_score').put(function(req, res) {
 
