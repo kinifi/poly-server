@@ -1,4 +1,4 @@
-poly-server{
+{
   "name": "Mesh",
   "description": "a server for polys",
   "repository": "https://github.com/kinifi/poly-server"
