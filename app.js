@@ -140,10 +140,7 @@ router.route('/poly/:polyname').get(function(req, res) {
   //search the database for the score and return it in json format
   firstleaderboard
     .find({ 'poly': req.params.polyname})
-    //.sort({'downloads': -1})
-    //.limit(theCount)
-  	.toArray(function(err,results){
-
+  	.toArray(function(err,results) {
       //check if we have any errors first
       if(err){
         //send the error
@@ -152,16 +149,14 @@ router.route('/poly/:polyname').get(function(req, res) {
 
       //send out the results
       if(results) {
-        if(results.Length !== undefined) {
+        //console.log(results);
+        if(results.length === undefined || results.length === 0 || results === null) {
           res.json({ message: 'no poly with that exact match'});
         }
         else {
           //send the values back
           res.json(results);
         }
-
-        // console.log(results.Length);
-
       }
       else {
         res.json({ message: 'error', error: 'no results'});
