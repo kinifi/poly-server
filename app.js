@@ -67,50 +67,75 @@ router.use(function(req, res, next) {
 //TODO: make this api better..
 router.route('/poly/:name/:version/:description/:repotype/:repourl/:reposize/:keywords/:author/:license/:bugsurl/:website/:featured/:private/:downloads').post(function(req, res) {
 
-    //get the data we need and store it
-    //TODO: validate this data before inserting
+  //make sure we dont already have a poly with this name
+  //search the database for the score and return it in json format
+  firstleaderboard
+    .find({ 'poly': req.params.name})
+    //.sort({'downloads': -1})
+    //.limit(theCount)
+    .toArray(function(err,results) {
+      //check if we have any errors first
+      if(err){
+        //send the error
+        res.json({ message: 'error checking if poly exists', error: err});
+      }
 
-    //insert the data into the database
-    firstleaderboard.insert({
-      'poly' : req.params.name,
-      'version' : req.params.version,
-      'description' : req.params.description,
-      'repotype' : req.params.repotype,
-      'repourl' : req.params.repourl,
-      'reposize' : req.params.reposize,
-      'keywords' : req.params.keywords,
-      'author' : req.params.author,
-      'license' : req.params.license,
-      'bugsurl' : req.params.bugsurl,
-      'website' : req.params.website,
-      'featured' : false,
-      'privatepoly' : req.params.private,
-      'downloads' : 0
-    }, function(err, result) {
-        //if error send the error message
-        if(err){
-          console.log(err);
-          res.json({ message: 'error saving score', error: err});
+      //send out the results
+      if(results) {
+        //console.log('results: ' + results.length);
+        //make sure our results are not null, undefined, or a length of zero
+        if(results.length === undefined || results === null || results.length === 0) {
+          //success create poly
+          //insert the data into the database
+          firstleaderboard.insert({
+            'poly' : req.params.name,
+            'version' : req.params.version,
+            'description' : req.params.description,
+            'repotype' : req.params.repotype,
+            'repourl' : req.params.repourl,
+            'reposize' : req.params.reposize,
+            'keywords' : req.params.keywords,
+            'author' : req.params.author,
+            'license' : req.params.license,
+            'bugsurl' : req.params.bugsurl,
+            'website' : req.params.website,
+            'featured' : false,
+            'privatepoly' : req.params.private,
+            'downloads' : 0
+          }, function(err, result) {
+              //if error send the error message
+              if(err){
+                console.log(err);
+                res.json({ message: 'error saving score', error: err});
+              }
+              else {
+                //no error so send them the success message
+                //send the whole result so they can save the ID locally if needed
+                res.json({ message: 'success', result: result});
+              }
+          });
+
         }
         else {
-          //no error so send them the success message
-          //send the whole result so they can save the ID locally if needed
-          res.json({ message: 'success', result: result});
+          //send the values back because our poly exists
+          //console.log(result);
+          res.json({ message: 'Error: Poly exists already.', error: err});
+
         }
+
+      }
+      else {
+        res.json({ message: 'error', error: 'no results'});
+        return;
+      }
+
     });
 
 
-  });
+});
 
-//Gets a poly and its information by name. STRICT
+//Gets a poly and its information by name. STRICTLY returns a single poly by name
 router.route('/poly/:polyname').get(function(req, res) {
-
-  //how many leaderboard values do you want?
-  //var theCount = Number(req.params.count_num);
-  //var keyword = req.params.keyword;
-  //console.log(theCount, keyword);
-
-
 
   //search the database for the score and return it in json format
   firstleaderboard
@@ -143,6 +168,7 @@ router.route('/poly/:polyname').get(function(req, res) {
       }
 
   	});
+
 });
 
 // /api/player/:player_name - get  - a single player
