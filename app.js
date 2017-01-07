@@ -15,11 +15,13 @@ var express         = require('express');        // call express
 var app             = express();                 // define our app using express
 var bodyParser      = require('body-parser');
 var httpProxy       = require('http-proxy');
+var fileUpload      = require('express-fileupload');
 
 //setup the database
 var fs              = require("fs");
 var Engine          = require('tingodb')();
 var database        = new Engine.Db(__dirname + '/db',{});
+
 
 //the poly database
 //TODO refactor this and rename the firstleaderboard to poly-database
@@ -45,6 +47,7 @@ app.enable('trust proxy');
 
 // only apply to requests that begin with /api/
 app.use('/api/', apiLimiter);
+app.use(fileUpload());
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -65,12 +68,15 @@ router.use(function(req, res, next) {
 });
 
 //TODO: make this api better..
-router.route('/poly/:name/:version/:description/:repotype/:repourl/:reposize/:keywords/:author/:license/:bugsurl/:website/:featured/:private/:downloads').post(function(req, res) {
+// router.route('/poly/:name/:version/:description/:repotype/:repourl/:reposize/:keywords/:author/:license/:bugsurl/:website/:featured/:private/:downloads').post(function(req, res) {
+router.route('/poly').post(function(req, res) {
+
+  console.log(req.body);
 
   //make sure we dont already have a poly with this name
   //search the database for the score and return it in json format
   firstleaderboard
-    .find({ 'poly': req.params.name})
+    .find({ 'poly': req.body.name})
     //.sort({'downloads': -1})
     //.limit(theCount)
     .toArray(function(err,results) {
@@ -82,25 +88,25 @@ router.route('/poly/:name/:version/:description/:repotype/:repourl/:reposize/:ke
 
       //send out the results
       if(results) {
-        //console.log('results: ' + results.length);
+        
         //make sure our results are not null, undefined, or a length of zero
         if(results.length === undefined || results === null || results.length === 0) {
           //success create poly
           //insert the data into the database
           firstleaderboard.insert({
-            'poly' : req.params.name,
-            'version' : req.params.version,
-            'description' : req.params.description,
-            'repotype' : req.params.repotype,
-            'repourl' : req.params.repourl,
-            'reposize' : req.params.reposize,
-            'keywords' : req.params.keywords,
-            'author' : req.params.author,
-            'license' : req.params.license,
-            'bugsurl' : req.params.bugsurl,
-            'website' : req.params.website,
+            'poly' : req.body.name,
+            'version' : req.body.version,
+            'description' : req.body.description,
+            'repotype' : req.body.repotype,
+            'repourl' : req.body.repourl,
+            'reposize' : req.body.reposize,
+            'keywords' : req.body.keywords,
+            'author' : req.body.author,
+            'license' : req.body.license,
+            'bugsurl' : req.body.bugsurl,
+            'website' : req.body.website,
             'featured' : false,
-            'privatepoly' : req.params.private,
+            'privatepoly' : req.body.private,
             'downloads' : 0
           }, function(err, result) {
               //if error send the error message
