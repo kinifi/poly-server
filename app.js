@@ -88,7 +88,7 @@ router.route('/poly').post(function(req, res) {
 
       //send out the results
       if(results) {
-        
+
         //make sure our results are not null, undefined, or a length of zero
         if(results.length === undefined || results === null || results.length === 0) {
           //success create poly
@@ -150,14 +150,14 @@ router.route('/poly/:polyname').get(function(req, res) {
       //check if we have any errors first
       if(err){
         //send the error
-        res.json({ message: 'error getting polys', error: err});
+        res.json({ message: 'error getting polys', error: "error"});
       }
 
       //send out the results
       if(results) {
         //console.log(results);
         if(results.length === undefined || results.length === 0 || results === null) {
-          res.json({ message: 'no poly with that exact match'});
+          res.json({ message: 'no poly with that exact match', error: 'error'});
         }
         else {
           //send the values back
@@ -165,7 +165,7 @@ router.route('/poly/:polyname').get(function(req, res) {
         }
       }
       else {
-        res.json({ message: 'error', error: 'no results'});
+        res.json({ message: 'no results', error: 'error'});
       }
 
   	});
