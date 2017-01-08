@@ -15,7 +15,6 @@ var express         = require('express');        // call express
 var app             = express();                 // define our app using express
 var bodyParser      = require('body-parser');
 var httpProxy       = require('http-proxy');
-var fileUpload      = require('express-fileupload');
 
 //setup the database
 var fs              = require("fs");
@@ -47,7 +46,6 @@ app.enable('trust proxy');
 
 // only apply to requests that begin with /api/
 app.use('/api/', apiLimiter);
-app.use(fileUpload());
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
