@@ -1,4 +1,4 @@
-# Poly - Coming Soon
+# Poly - Server
 ## A Engine Agnostic Game Package Manager
 
 ![Game Package Manager](http://i.imgur.com/dU0w44o.png)
