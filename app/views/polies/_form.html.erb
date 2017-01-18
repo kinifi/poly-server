@@ -1,0 +1,37 @@
+<%= form_for(poly) do |f| %>
+  <% if poly.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(poly.errors.count, "error") %> prohibited this poly from being saved:</h2>
+
+      <ul>
+      <% poly.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :repotype %>
+    <%= f.text_field :repotype %>
+  </div>
+
+  <div class="field">
+    <%= f.label :repourl %>
+    <%= f.text_field :repourl %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
