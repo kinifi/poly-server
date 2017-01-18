@@ -4,6 +4,7 @@
 /* mixins, variables, etc. */
 $emerald: #3FC380;
 $white: FFFFFF;
+$black: #000000;
 $gray-medium-light: #3FC380;
 
 /* universal */
@@ -52,6 +53,7 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+  color: $black;
 }
 
 
