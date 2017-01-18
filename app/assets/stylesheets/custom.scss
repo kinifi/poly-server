@@ -2,7 +2,8 @@
 @import "bootstrap";
 
 /* mixins, variables, etc. */
-
+$emerald: #3FC380;
+$white: FFFFFF;
 $gray-medium-light: #3FC380;
 
 /* universal */
@@ -45,7 +46,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
+  color: $white;
 }
 
 p {
