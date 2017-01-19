@@ -12,28 +12,58 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label :name, "Name: The name users will search for" %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :description%>
+    <%= f.label :description %>
     <%= f.text_field :description %>
   </div>
 
   <div class="field">
-    <%= f.label :repotype %>
-    <%= f.text_field :repotype %>
+    <%= f.label :docs %>
+    <%= f.text_field :docs %>
   </div>
 
   <div class="field">
-    <%= f.label :repourl %>
-    <%= f.text_field :repourl %>
+    <%= f.label :bugtracker %>
+    <%= f.text_field :bugtracker %>
+  </div>
+
+  <div class="field">
+    <%= f.label :downloads %>
+    <%= f.text_field :downloads %>
+  </div>
+
+  <div class="field">
+    <%= f.label :license %>
+    <%= f.text_field :license %>
   </div>
 
   <div class="field">
     <%= f.label :author %>
     <%= f.text_field :author %>
+  </div>
+
+  <div class="field">
+    <%= f.label :submittedby %>
+    <%= f.text_field :submittedby %>
+  </div>
+
+  <div class="field">
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gitsshurl %>
+    <%= f.text_field :gitsshurl %>
+  </div>
+
+  <div class="field">
+    <%= f.label :repotype %>
+    <%= f.text_field :repotype %>
   </div>
 
   <div class="actions">

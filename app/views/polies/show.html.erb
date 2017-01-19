@@ -11,21 +11,49 @@
 </p>
 
 <p>
-  <strong>Repotype: (.git)</strong>
-  <%= @poly.repotype %>
+  <strong>Docs:</strong>
+  <%= @poly.docs %>
 </p>
 
 <p>
-  <strong>Repourl: (.git extension)</strong>
-  <%= @poly.repourl %>
+  <strong>Bugtracker:</strong>
+  <%= @poly.bugtracker %>
 </p>
 
 <p>
-  <strong>Author: (Who is submitting this Poly)</strong>
+  <strong>Downloads:</strong>
+  <%= @poly.downloads %>
+</p>
+
+<p>
+  <strong>License:</strong>
+  <%= @poly.license %>
+</p>
+
+<p>
+  <strong>Author:</strong>
   <%= @poly.author %>
 </p>
 
-<div class="btn-group btn-group-justified">
-<%= link_to 'Edit', edit_poly_path(@poly), class: "btn btn-danger" %>
-<%= link_to 'Back', polies_path, class: "btn btn-success" %>
-</div>
+<p>
+  <strong>Submittedby:</strong>
+  <%= @poly.submittedby %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @poly.website %>
+</p>
+
+<p>
+  <strong>Gitsshurl:</strong>
+  <%= @poly.gitsshurl %>
+</p>
+
+<p>
+  <strong>Repotype:</strong>
+  <%= @poly.repotype %>
+</p>
+
+<%= link_to 'Edit', edit_poly_path(@poly) %> |
+<%= link_to 'Back', polies_path %>

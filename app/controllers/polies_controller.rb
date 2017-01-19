@@ -1,15 +1,8 @@
 class PoliesController < ApplicationController
   before_action :set_poly, only: [:show, :edit, :update, :destroy]
 
-  # def searchindex
-  #   @polies = Poly.all
-  #   if params[:search]
-  #     @polies = Poly.search(params[:search])
-  #   else
-  #     redirect_to polies_path , notice: "No Polys Found With That Search"
-  #   end
-  # end
-
+  # GET /polies
+  # GET /polies.json
   def index
     @polies = Poly.all
     if params[:search]
@@ -81,6 +74,6 @@ class PoliesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def poly_params
-      params.require(:poly).permit(:name, :description, :repotype, :repourl)
+      params.require(:poly).permit(:name, :description, :docs, :bugtracker, :downloads, :license, :author, :submittedby, :website, :gitsshurl, :repotype)
     end
 end

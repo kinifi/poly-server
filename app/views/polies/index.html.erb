@@ -7,8 +7,15 @@
     <tr>
       <th>Name</th>
       <th>Description</th>
+      <th>Docs</th>
+      <th>Bugtracker</th>
+      <th>Downloads</th>
+      <th>License</th>
+      <th>Author</th>
+      <th>Submittedby</th>
+      <th>Website</th>
+      <th>Gitsshurl</th>
       <th>Repotype</th>
-      <th>Repourl</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,11 +25,18 @@
       <tr>
         <td><%= poly.name %></td>
         <td><%= poly.description %></td>
+        <td><%= poly.docs %></td>
+        <td><%= poly.bugtracker %></td>
+        <td><%= poly.downloads %></td>
+        <td><%= poly.license %></td>
+        <td><%= poly.author %></td>
+        <td><%= poly.submittedby %></td>
+        <td><%= poly.website %></td>
+        <td><%= poly.gitsshurl %></td>
         <td><%= poly.repotype %></td>
-        <td><%= poly.repourl %></td>
         <td><%= link_to 'Show', poly %></td>
         <td><%= link_to 'Edit', edit_poly_path(poly) %></td>
-        <!-- <td><%= link_to 'Destroy', poly, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        <td><%= link_to 'Destroy', poly, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +44,4 @@
 
 <br>
 
-<%= link_to 'Create New Poly', new_poly_path, class: "btn btn-success" %>
+<%= link_to 'New Poly', new_poly_path %>

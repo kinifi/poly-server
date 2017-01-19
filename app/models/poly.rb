@@ -6,4 +6,5 @@ class Poly < ApplicationRecord
 
   #make sure the description can only be 140 characters
   validates :description, length: { maximum: 140 }
+  
 end

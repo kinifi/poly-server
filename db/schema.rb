@@ -10,29 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118055855) do
+ActiveRecord::Schema.define(version: 20170118211807) do
 
   create_table "polies", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "docs"
+    t.string   "bugtracker"
+    t.string   "downloads"
+    t.string   "license"
+    t.string   "author"
+    t.string   "submittedby"
+    t.string   "website"
+    t.string   "gitsshurl"
     t.string   "repotype"
-    t.string   "repourl"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "author"
-    t.string   "website"
-    t.string   "bugsurl"
-    t.string   "license"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "password_confirmation"
-    t.boolean  "mailing_list"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
   end
 
 end

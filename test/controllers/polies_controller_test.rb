@@ -17,7 +17,7 @@ class PoliesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create poly" do
     assert_difference('Poly.count') do
-      post polies_url, params: { poly: { description: @poly.description, name: @poly.name, repotype: @poly.repotype, repourl: @poly.repourl } }
+      post polies_url, params: { poly: { author: @poly.author, bugtracker: @poly.bugtracker, description: @poly.description, docs: @poly.docs, downloads: @poly.downloads, gitsshurl: @poly.gitsshurl, license: @poly.license, name: @poly.name, repotype: @poly.repotype, submittedby: @poly.submittedby, website: @poly.website } }
     end
 
     assert_redirected_to poly_url(Poly.last)
@@ -34,7 +34,7 @@ class PoliesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update poly" do
-    patch poly_url(@poly), params: { poly: { description: @poly.description, name: @poly.name, repotype: @poly.repotype, repourl: @poly.repourl } }
+    patch poly_url(@poly), params: { poly: { author: @poly.author, bugtracker: @poly.bugtracker, description: @poly.description, docs: @poly.docs, downloads: @poly.downloads, gitsshurl: @poly.gitsshurl, license: @poly.license, name: @poly.name, repotype: @poly.repotype, submittedby: @poly.submittedby, website: @poly.website } }
     assert_redirected_to poly_url(@poly)
   end
 
