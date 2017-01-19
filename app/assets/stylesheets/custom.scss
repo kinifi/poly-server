@@ -5,6 +5,31 @@ $gray-medium-light: #eaeaea;
 $white: #FFFFFF;
 $black: #000000;
 
+#polytable {
+  width: 100%
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+th, td {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  // padding: 15px;
+}
+
+#websitetitle {
+  font-size: 25px;
+  font-weight: bold;
+  // font-style: italic;
+  // padding-bottom: 10px;
+}
+
+#website {
+    font-size: 15px;
+}
+
 .jumbotron {
   // background-image:url("background.png");
   background-color: $white;
