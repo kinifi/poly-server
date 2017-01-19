@@ -1,28 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<br>
+<h1>
   <%= @poly.name %>
-</p>
+</h1>
+<hr>
 
-<p>
-  <strong>Description:</strong>
+<h5>
   <%= @poly.description %>
-</p>
+</h5>
+<hr>
+
+<!-- <p>
+  <strong>Downloads:</strong>
+  <%= @poly.downloads %>
+</p> -->
 
 <p>
-  <strong>Docs:</strong>
-  <%= @poly.docs %>
+  <strong>Website:</strong>
+  <%= link_to @poly.website, @poly.website %>
 </p>
 
 <p>
   <strong>Bugtracker:</strong>
-  <%= @poly.bugtracker %>
+  <%= link_to @poly.bugtracker, @poly.bugtracker %>
 </p>
 
 <p>
-  <strong>Downloads:</strong>
-  <%= @poly.downloads %>
+  <strong>Docs:</strong>
+  <%= link_to @poly.docs, @poly.docs %>
 </p>
 
 <p>
@@ -36,24 +42,23 @@
 </p>
 
 <p>
-  <strong>Submittedby:</strong>
+  <strong>Submitted By:</strong>
   <%= @poly.submittedby %>
 </p>
-
-<p>
-  <strong>Website:</strong>
-  <%= @poly.website %>
-</p>
-
-<p>
-  <strong>Gitsshurl:</strong>
-  <%= @poly.gitsshurl %>
-</p>
+<hr>
 
 <p>
   <strong>Repotype:</strong>
   <%= @poly.repotype %>
 </p>
 
+<p>
+  <strong>HTTPS URL:</strong>
+  <%= @poly.gitsshurl %>
+</p>
+
+<hr>
+
+<p>Note: If a Poly needs to be deleted please contact @kinifi</p>
 <%= link_to 'Edit', edit_poly_path(@poly) %> |
-<%= link_to 'Back', polies_path %>
+<%= link_to 'Back To List', polies_path %>
